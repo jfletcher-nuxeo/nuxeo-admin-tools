@@ -1,39 +1,44 @@
 #!/bin/sh
 
-# Script to make a copy of postgres data and binaries.
+# Script to make a backup of Nuxeo running on Ubuntu/AWS Presales template.
 # IMPORTANT: will stop and start Nuxeo.
 
 nuxeoRoot="/var/lib/nuxeo"
-dumpRoot="/var/lib/nuxeo/server/tmp/dumps"
-stamp=`date +%Y%m%d_%H%M%S`
+backupRoot="/var/lib/nuxeo/server/tmp/backups"
+backupStamp=`date +%Y%m%d_%H%M%S`
+nuxeoConf="/etc/nuxeo/nuxeo.conf"
+
 
 # The dumped files will be placed here.
-dumpFolder="$dumpRoot/$stamp"
+backupFolder="$backupRoot/$backupStamp"
 
 # File for the postgres dump.
-dumpFile="pg_db.sql"
+pgBackupFile="pg_db.sql"
 
 # File for the binaries.
-binaryFile="binaries.tar.gz"
+binaryBackupfile="binaries.tar.gz"
 
 # Stop the server.
-./nuxeoctl stop
+$nuxeoRoot/bin/nuxeoctl stop
 
-if [ ! -d "$dumpRoot" ]; then
-   mkdir $dumpRoot
+if [ ! -d "$backupRoot" ]; then
+   mkdir $backupRoot
 fi
 
-if [ ! -d "$dumpFolder" ]; then
-   mkdir $dumpFolder
+if [ ! -d "$backupFolder" ]; then
+   mkdir $backupFolder
 fi
 
-# Dump the data.
-pg_dump -U nuxeo -p 5433 nuxeo -f $dumpFolder/$dumpFile
+# Backup nuxeo.conf.
+cp $nuxeoConf $backupFolder
 
-# Get the binaries
-tar -zcf $dumpFolder/$binaryFile $nuxeoRoot/data/binaries/
+# Backup the data.
+pg_dump -U nuxeo -p 5433 nuxeo -f $backupFolder/$pgBackupFile
+
+# Create a zip of the 'binaries' directory using gzip
+tar -zcf $backupFolder/$binaryBackupfile $nuxeoRoot/data/binaries/
 
 # Start the server.
-./nuxeoctl start
+$nuxeoRoot/bin/nuxeoctl start
 
-echo "Done! Your files are at $dumpFolder"
+echo "Done! Your files are at $backupFolder"
