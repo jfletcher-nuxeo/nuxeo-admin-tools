@@ -9,7 +9,7 @@ then
     nuxeoRoot=$1
     studioID=$2
 else
-    echo 'You should pass the path to Nuxeo and the ID of the Studio project'
+    echo 'usage: reset path_to_Nuxeo studio_project_id'
     exit 1
 fi
 
