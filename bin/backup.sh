@@ -8,7 +8,6 @@ backupRoot="/var/lib/nuxeo/server/tmp/backups"
 backupStamp=`date +%Y%m%d_%H%M%S`
 nuxeoConf="/etc/nuxeo/nuxeo.conf"
 
-
 # The dumped files will be placed here.
 backupFolder="$backupRoot/$backupStamp"
 
