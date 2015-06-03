@@ -1,0 +1,23 @@
+# common Nuxeo ignores
+.classpath
+.project
+.settings
+.idea
+pojo-bin
+target
+*~
+*~bak
+*-bak
+*.bak
+*-new
+*.rej
+*.orig
+.DS_Store
+.pydevproject
+*.pyc
+*.iml
+*.ipr
+*.iws
+*.gpd.*
+*cpJar*
+dependency-tree.log
