@@ -37,11 +37,11 @@ if [ ! -d "$backupFolder" ]; then
    mkdir $backupFolder
 fi
 
-# backup nuxeo.conf.
+# Backup nuxeo.conf.
 cp $nuxeoConf $backupFolder
 
-# backup the data.
-pg_dump -U nuxeo -p 5432 $database -f $backupFolder/$pgBackupFile
+# Backup the data.
+pg_dump -U nuxeo $database -f $backupFolder/$pgBackupFile
 
 # Create a zip of the 'binaries' directory using gzip
 tar -czf $backupFolder/$binaryBackupfile $nuxeoRoot/nxserver/data/binaries/
