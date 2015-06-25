@@ -18,7 +18,7 @@ pgBackupFile="pg_db.sql"
 binaryBackupfile="binaries.tar.gz"
 
 # Stop the server.
-$nuxeoRoot/bin/nuxeoctl stop
+$nuxeoRoot/server/bin/nuxeoctl stop
 
 if [ ! -d "$backupRoot" ]; then
    mkdir $backupRoot
@@ -38,6 +38,6 @@ pg_dump -U nuxeo -p 5433 nuxeo -f $backupFolder/$pgBackupFile
 tar -zcf $backupFolder/$binaryBackupfile $nuxeoRoot/data/binaries/
 
 # Start the server.
-$nuxeoRoot/bin/nuxeoctl start
+$nuxeoRoot/server/bin/nuxeoctl start
 
 echo "Done! Your files are at $backupFolder"
