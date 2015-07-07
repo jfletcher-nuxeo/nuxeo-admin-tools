@@ -12,7 +12,7 @@ then
 	# Defaults for presales instances.
 	nuxeoRoot="/var/lib/nuxeo/server"
 	dbName="nuxeo"
-	pathToBinaries="$nuxeoRoot/data/binaries/"
+	pathToBinaries="/var/lib/nuxeo/data/binaries/"
 	nuxeoConf="/etc/nuxeo/nuxeo.conf"
 else
 	nuxeoRoot=$1
