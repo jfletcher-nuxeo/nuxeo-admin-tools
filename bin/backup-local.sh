@@ -44,6 +44,6 @@ cp $nuxeoConf $backupFolder
 pg_dump -U nuxeo $database -f $backupFolder/$pgBackupFile
 
 # Create a zip of the 'binaries' directory using gzip
-tar -czf $backupFolder/$binaryBackupfile $nuxeoRoot/nxserver/data/binaries/
+tar -czf $backupFolder/$binaryBackupfile -C $nuxeoRoot/nxserver/data binaries
 
 echo "Done! Your files are at $backupFolder"
