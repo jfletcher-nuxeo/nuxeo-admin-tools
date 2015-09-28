@@ -35,7 +35,7 @@ cp $nuxeoConf $backupFolder
 pg_dump -U nuxeo -p 5433 nuxeo -f $backupFolder/$pgBackupFile
 
 # Create a zip of the 'binaries' directory using gzip
-tar -zcf $backupFolder/$binaryBackupfile $nuxeoRoot/data/binaries/
+tar -czf $backupFolder/$binaryBackupfile -C $nuxeoRoot/data binaries
 
 # Start the server.
 $nuxeoRoot/server/bin/nuxeoctl start
